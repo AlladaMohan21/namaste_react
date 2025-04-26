@@ -2,8 +2,8 @@
   "name": "namaste react",
   "version": "1.0.0",
   "description": "This is a npm [package",
-  "main": "App.js",
   "scripts": {
+    "start": "parcel index.html",
     "test": "jest"
   },
   "repository": {
@@ -23,5 +23,9 @@
   "homepage": "https://github.com/AlladaMohan21/namaste_react#readme",
   "devDependencies": {
     "parcel": "^2.14.4"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   }
 }
