@@ -1,0 +1,11 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.LOGO_URL = exports.CDN_URL = void 0;
+var CDN_URL = "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/";
+exports.CDN_URL = CDN_URL;
+var LOGO_URL = "https://www.logodesign.net/logo/smoking-burger-with-lettuce-3624ld.png?nwm=1&nws=1&industry=fast-food&sf=&txt_keyword=All";
+exports.LOGO_URL = LOGO_URL;
+//# sourceMappingURL=constants.dev.js.map
