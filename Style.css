@@ -127,3 +127,8 @@ padding: 0px 20px;
     display:flex;
     margin:10px;
 }
+.user-class{
+    border:5px solid black;
+    padding: 9px;
+    margin:10px;
+}
