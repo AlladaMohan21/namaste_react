@@ -9,21 +9,16 @@ const RestaurantMenu = () => {
   }
 const restaurant = resInfo?.cards?.[2]?.card?.card?.info || {};
 const { name, cuisines, costForTwoMessage } = restaurant;
-
-
   const regularCards = resInfo?.cards?.find((c) => c.groupedCard)?.groupedCard?.cardGroupMap?.REGULAR?.cards || [];
   const topPicksCard = regularCards.find(
     (c) => c?.card?.card?.carousel && c?.card?.card?.title?.includes("Top Picks")
   );
   const topPicks = topPicksCard?.card?.card?.carousel || [];
-
   return (
     <div className="menu">
       <h1>{name}</h1>
 <h3>{cuisines?.join(", ")}</h3>
 <h3>{costForTwoMessage}</h3>
-
-
       <h2>Top Picks</h2>
       <ul>
         {topPicks.map((pick) => (
