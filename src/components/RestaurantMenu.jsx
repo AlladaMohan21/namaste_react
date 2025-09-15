@@ -1,30 +1,51 @@
 import Shimmer from "./Shimmer";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
+import RestaurantCategory from "./RestaurantCategory";
+import {useState} from"react";
+
 const RestaurantMenu = () => {
-  const {resId}=useParams();
-  const resInfo=useRestaurantMenu(resId);
+  const { resId } = useParams();
+  const resInfo = useRestaurantMenu(resId);
+  const [showIndex,setShowIndex]=useState(null);
+
+
+
   if (!resInfo) {
     return <Shimmer />;
   }
-const restaurant = resInfo?.cards?.[2]?.card?.card?.info || {};
-const { name, cuisines, costForTwoMessage } = restaurant;
-  const regularCards = resInfo?.cards?.find((c) => c.groupedCard)?.groupedCard?.cardGroupMap?.REGULAR?.cards || [];
-  const topPicksCard = regularCards.find(
-    (c) => c?.card?.card?.carousel && c?.card?.card?.title?.includes("Top Picks")
+
+  const restaurant = resInfo?.cards?.[2]?.card?.card?.info || {};
+  const { name, cuisines, costForTwoMessage } = restaurant;
+
+  // Extract regular menu cards
+  const regularCards =
+    resInfo?.cards?.find((c) => c.groupedCard)?.groupedCard?.cardGroupMap?.REGULAR?.cards || [];
+  // Find Recommended section instead of Top Picks
+  const recommendedCard = regularCards.find(
+    (c) => c?.card?.card?.title && c?.card?.card?.title.includes("Recommended")
   );
-  const topPicks = topPicksCard?.card?.card?.carousel || [];
+  const recommendedItems = recommendedCard?.card?.card?.itemCards || [];
+
+    const categories = regularCards.filter(
+    (c) => c?.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+  );
+  console.log(categories);
+
   return (
-    <div className="menu">
-      <h1>{name}</h1>
-<h3>{cuisines?.join(", ")}</h3>
-<h3>{costForTwoMessage}</h3>
-      <h2>Top Picks</h2>
-      <ul>
-        {topPicks.map((pick) => (
-          <li key={pick?.dish?.info?.id}>{pick?.dish?.info?.name}</li>
+    <div className="text-center">
+      <h1 className="font-bold my-6 text-2xl">{name}</h1>
+      <p className="font-bold text-lg">
+        {cuisines?.join(",")} - {costForTwoMessage}
+      </p>
+      {categories.map((category,index)=>(
+        <RestaurantCategory 
+        key={category?.card?.card?.title || index} 
+        data={category?.card?.card} 
+        showItems={index ===showIndex ? true:false}
+        setShowIndex={() => setShowIndex(index === showIndex ? null : index)}
+        />
         ))}
-      </ul>
     </div>
   );
 };

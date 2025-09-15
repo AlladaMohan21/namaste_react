@@ -13,6 +13,6 @@
             <h3>my email is @kjfkj</h3>
         </div>
     )
-}
+} 
 
 export default User;

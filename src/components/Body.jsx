@@ -20,7 +20,6 @@ const Body = () => {
 
     const json = await data.json();
 
-    console.log("All cards:", json?.data?.cards);
 
     const restaurants =
       json?.data?.cards?.find(
